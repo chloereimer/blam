@@ -17,11 +17,11 @@ RSpec.describe "/weapons", type: :request do
   # Weapon. As you add validations to Weapon, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) {
-    skip("Add a hash of attributes valid for your model")
+    build(:weapon).attributes.except("id", "created_at", "updated_at")
   }
 
   let(:invalid_attributes) {
-    skip("Add a hash of attributes invalid for your model")
+    build(:weapon, name: nil).attributes.except("id", "created_at", "updated_at")
   }
 
   # This should return the minimal set of values that should be in the headers
@@ -77,7 +77,7 @@ RSpec.describe "/weapons", type: :request do
         post weapons_url,
           params: {weapon: invalid_attributes}, headers: valid_headers, as: :json
         expect(response).to have_http_status(:unprocessable_entity)
-        expect(response.content_type).to eq("application/json")
+        expect(response.content_type).to match(a_string_including("application/json"))
       end
     end
   end
@@ -85,7 +85,7 @@ RSpec.describe "/weapons", type: :request do
   describe "PATCH /update" do
     context "with valid parameters" do
       let(:new_attributes) {
-        skip("Add a hash of attributes valid for your model")
+        build(:weapon, name: "OPQ").attributes.except("id", "created_at", "updated_at")
       }
 
       it "updates the requested weapon" do
@@ -93,7 +93,7 @@ RSpec.describe "/weapons", type: :request do
         patch weapon_url(weapon),
           params: {weapon: new_attributes}, headers: valid_headers, as: :json
         weapon.reload
-        skip("Add assertions for updated state")
+        expect(weapon.name).to eq(new_attributes["name"])
       end
 
       it "renders a JSON response with the weapon" do
@@ -111,7 +111,7 @@ RSpec.describe "/weapons", type: :request do
         patch weapon_url(weapon),
           params: {weapon: invalid_attributes}, headers: valid_headers, as: :json
         expect(response).to have_http_status(:unprocessable_entity)
-        expect(response.content_type).to eq("application/json")
+        expect(response.content_type).to match(a_string_including("application/json"))
       end
     end
   end
