@@ -39,13 +39,14 @@ class WeaponsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_weapon
-      @weapon = Weapon.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def weapon_params
-      params.require(:weapon).permit(:name, :item_score, :level_requirement, :rarity, :damage_per_projectile, :number_of_projectiles, :accuracy, :handling, :reload_time, :fire_rate, :magazine_size, :ammo_consumed_per_shot)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_weapon
+    @weapon = Weapon.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def weapon_params
+    params.require(:weapon).permit(:name, :item_score, :level_requirement, :rarity, :damage_per_projectile, :number_of_projectiles, :accuracy, :handling, :reload_time, :fire_rate, :magazine_size, :ammo_consumed_per_shot)
+  end
 end

@@ -10,7 +10,6 @@ RSpec.describe WeaponsController, type: :routing do
       expect(get: "/weapons/1").to route_to("weapons#show", id: "1")
     end
 
-
     it "routes to #create" do
       expect(post: "/weapons").to route_to("weapons#create")
     end
