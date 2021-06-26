@@ -20,6 +20,7 @@ group :development, :test do
   gem "byebug", platforms: [:mri, :mingw, :x64_mingw]
   gem "standard", "~> 1.1" # Standard for linting/formatting
   gem "rspec-rails", "~> 5.0.0" # Rspec for tests
+  gem "factory_bot_rails", "~>6.2" # factory bot for factories
 end
 
 group :development do
