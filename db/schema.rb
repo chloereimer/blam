@@ -10,9 +10,26 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 0) do
+ActiveRecord::Schema.define(version: 2021_06_26_024638) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "weapons", force: :cascade do |t|
+    t.string "name"
+    t.integer "item_score"
+    t.integer "level_requirement"
+    t.string "rarity"
+    t.float "damage_per_projectile"
+    t.float "number_of_projectiles"
+    t.float "accuracy"
+    t.float "handling"
+    t.float "reload_time"
+    t.float "fire_rate"
+    t.float "magazine_size"
+    t.float "ammo_consumed_per_shot"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
 
 end
