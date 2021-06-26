@@ -11,4 +11,4 @@ db-rollback:
 	docker compose run api bundle exec rails db:rollback
 
 bundle-lock:
-	docker compose run api bundle lock
+	docker run --rm -v $(shell pwd):/usr/src/blam -w /usr/src/blam ruby:3.0.1 bundle lock
