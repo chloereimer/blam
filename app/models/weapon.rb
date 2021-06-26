@@ -1,4 +1,6 @@
 class Weapon < ApplicationRecord
+  attribute :ammo_consumed_per_shot, default: 1
+
   validates :name, presence: true
   validates :item_score, presence: true
   validates :level_requirement, presence: true

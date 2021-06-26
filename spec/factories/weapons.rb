@@ -11,6 +11,5 @@ FactoryBot.define do
     reload_time { 2.5 }
     fire_rate { 6.95 }
     magazine_size { 16 }
-    ammo_consumed_per_shot { 1 }
   end
 end
