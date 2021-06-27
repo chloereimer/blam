@@ -1,7 +1,7 @@
-lint:
+format:
 	docker compose run api bundle exec standardrb --fix
 
-lint-dry-run:
+lint:
 	docker compose run api bundle exec standardrb
 
 db-migrate:
