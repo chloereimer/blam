@@ -1,8 +1,32 @@
 require "rails_helper"
 
 RSpec.describe Weapon, type: :model do
-  it "has a valid factory" do
-    expect(build(described_class_symbol)).to be_valid
+  describe "weapon factory" do
+    it "is valid by default" do
+      expect(build(described_class_symbol)).to be_valid
+    end
+
+    it "is valid with a :with_status_effect trait" do
+      weapon = build(described_class_symbol, :with_status_effect)
+      expect(weapon).to be_valid
+    end
+
+    describe "when passed a :with_status_effect trait" do
+      it "sets a status_effect_element" do
+        weapon = build(described_class_symbol, :with_status_effect)
+        expect(weapon.status_effect_element).to be_truthy
+      end
+
+      it "sets a status_effect_damage" do
+        weapon = build(described_class_symbol, :with_status_effect)
+        expect(weapon.status_effect_damage).to be_truthy
+      end
+
+      it "sets a status_effect_chance" do
+        weapon = build(described_class_symbol, :with_status_effect)
+        expect(weapon.status_effect_chance).to be_truthy
+      end
+    end
   end
 
   it "orders on created_at" do
