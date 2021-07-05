@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_26_134752) do
+ActiveRecord::Schema.define(version: 2021_07_02_182051) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -31,6 +31,10 @@ ActiveRecord::Schema.define(version: 2021_06_26_134752) do
     t.float "ammo_consumed_per_shot", default: 1.0, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "element"
+    t.string "status_effect_element"
+    t.float "status_effect_damage"
+    t.float "status_effect_chance"
   end
 
 end
