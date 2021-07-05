@@ -39,6 +39,10 @@ RSpec.describe Weapon, type: :model do
     it "has a default ammo_consumed_per_shot of 1.0" do
       expect(described_class.new.ammo_consumed_per_shot).to eq(1.0)
     end
+
+    it "has a default element of Element::Physical" do
+      expect(described_class.new.element).to eq(Element::Physical)
+    end
   end
 
   describe "validations" do
@@ -89,6 +93,26 @@ RSpec.describe Weapon, type: :model do
     it "is invalid without an ammo_consumed_per_shot" do
       expect(build(described_class_symbol, ammo_consumed_per_shot: nil)).to be_invalid
     end
+
+    it "is invalid without an element" do
+      expect(build(described_class_symbol, element: nil)).to be_invalid
+    end
+
+    it "is invalid if element is not a subclass of Element::Base" do
+      expect(build(described_class_symbol, element: String)).to be_invalid
+    end
+
+    it "is invalid if status_effect_element is not a subclass of Element::Base" do
+      expect(build(described_class_symbol, status_effect_element: String)).to be_invalid
+    end
+  end
+
+  it "returns element as a subclass of Element::Base" do
+    expect(build(described_class_symbol).element).to be <= Element::Base
+  end
+
+  it "returns status_effect_element as a subclass of Element::Base" do
+    expect(build(described_class_symbol, :with_status_effect).status_effect_element).to be <= Element::Base
   end
 
   it "responds to projectile_damage_per_shot" do

@@ -1,7 +1,10 @@
 class Weapon < ApplicationRecord
+  include ActiveModel::Validations
+
   self.implicit_order_column = "created_at"
 
   attribute :ammo_consumed_per_shot, default: 1
+  attribute :element, default: Element::Physical
 
   validates :name, presence: true
   validates :item_score, presence: true
@@ -15,6 +18,16 @@ class Weapon < ApplicationRecord
   validates :fire_rate, presence: true
   validates :magazine_size, presence: true
   validates :ammo_consumed_per_shot, presence: true
+  validates :element, presence: true, is_element: true
+  validates :status_effect_element, is_element: true, allow_blank: true
+
+  def element
+    self[:element]&.constantize
+  end
+
+  def status_effect_element
+    self[:status_effect_element]&.constantize
+  end
 
   def shots_per_magazine
     magazine_size / ammo_consumed_per_shot
