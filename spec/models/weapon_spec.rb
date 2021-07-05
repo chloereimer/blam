@@ -11,6 +11,62 @@ RSpec.describe Weapon, type: :model do
     expect(described_class.last).to eq(described_class.order(:created_at).last)
   end
 
+  describe "attributes" do
+    it "has a default ammo_consumed_per_shot of 1.0" do
+      expect(described_class.new.ammo_consumed_per_shot).to eq(1.0)
+    end
+  end
+
+  describe "validations" do
+    it "is invalid without a name" do
+      expect(build(described_class_symbol, name: nil)).to be_invalid
+    end
+
+    it "is invalid without an item_score" do
+      expect(build(described_class_symbol, item_score: nil)).to be_invalid
+    end
+
+    it "is invalid without a level_requirement" do
+      expect(build(described_class_symbol, level_requirement: nil)).to be_invalid
+    end
+
+    it "is invalid without a rarity" do
+      expect(build(described_class_symbol, rarity: nil)).to be_invalid
+    end
+
+    it "is invalid without a damage_per_projectile" do
+      expect(build(described_class_symbol, damage_per_projectile: nil)).to be_invalid
+    end
+
+    it "is invalid without a number_of_projectiles" do
+      expect(build(described_class_symbol, number_of_projectiles: nil)).to be_invalid
+    end
+
+    it "is invalid without an accuracy" do
+      expect(build(described_class_symbol, accuracy: nil)).to be_invalid
+    end
+
+    it "is invalid without a handling" do
+      expect(build(described_class_symbol, handling: nil)).to be_invalid
+    end
+
+    it "is invalid without a reload_time" do
+      expect(build(described_class_symbol, reload_time: nil)).to be_invalid
+    end
+
+    it "is invalid without a fire_rate" do
+      expect(build(described_class_symbol, fire_rate: nil)).to be_invalid
+    end
+
+    it "is invalid without a magazine_size" do
+      expect(build(described_class_symbol, magazine_size: nil)).to be_invalid
+    end
+
+    it "is invalid without an ammo_consumed_per_shot" do
+      expect(build(described_class_symbol, ammo_consumed_per_shot: nil)).to be_invalid
+    end
+  end
+
   it "responds to projectile_damage_per_shot" do
     expect(build(described_class_symbol)).to respond_to(:projectile_damage_per_shot)
   end
