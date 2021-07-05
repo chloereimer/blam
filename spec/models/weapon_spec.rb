@@ -118,8 +118,6 @@ RSpec.describe Weapon, type: :model do
     weapon = build(described_class_symbol,
       damage_per_projectile: 10,
       number_of_projectiles: 2,
-      magazine_size: 48,
-      ammo_consumed_per_shot: 2,
       fire_rate: 4)
     expect(weapon.projectile_damage_per_second_excluding_reload_time).to eq(80)
   end
