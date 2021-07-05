@@ -47,6 +47,25 @@ class WeaponsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def weapon_params
-    params.require(:weapon).permit(:name, :item_score, :level_requirement, :rarity, :damage_per_projectile, :number_of_projectiles, :accuracy, :handling, :reload_time, :fire_rate, :magazine_size, :ammo_consumed_per_shot)
+    params
+      .require(:weapon)
+      .permit(
+        :name,
+        :item_score,
+        :level_requirement,
+        :rarity,
+        :damage_per_projectile,
+        :number_of_projectiles,
+        :accuracy,
+        :handling,
+        :reload_time,
+        :fire_rate,
+        :magazine_size,
+        :ammo_consumed_per_shot,
+        :element,
+        :status_effect_element,
+        :status_effect_damage,
+        :status_effect_chance
+      )
   end
 end
