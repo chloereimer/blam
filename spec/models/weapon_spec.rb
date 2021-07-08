@@ -184,4 +184,46 @@ RSpec.describe Weapon, type: :model do
       reload_time: 1.5)
     expect(weapon.projectile_damage_per_second_including_reload_time).to eq(64)
   end
+
+  it "responds to maximum_status_effects_per_magazine" do
+    expect(build(described_class_symbol)).to respond_to(:maximum_status_effects_per_magazine)
+  end
+
+  it "returns expected maximum_status_effects_per_magazine when fire rate is faster than status effect duration" do
+    weapon = build(
+      described_class_symbol,
+      :with_status_effect,
+      fire_rate: 1,
+      magazine_size: 30,
+      status_effect_element: Element::Incendiary)
+
+    expect(weapon.maximum_status_effects_per_magazine).to eq(7)
+  end
+
+  it "returns expected maximum_status_effects_per_magazine when fire rate is slower than status effect duration" do
+    weapon = build(
+      described_class_symbol,
+      :with_status_effect,
+      fire_rate: 0.16666666666666666,
+      magazine_size: 5,
+      status_effect_element: Element::Incendiary)
+
+    expect(weapon.maximum_status_effects_per_magazine).to eq(5)
+  end
+
+  it "responds to maximum_status_effect_damage_per_magazine" do
+    expect(build(described_class_symbol)).to respond_to(:maximum_status_effect_damage_per_magazine)
+  end
+
+  it "returns expected maximum_status_effect_damage_per_magazine" do
+    weapon = build(
+      described_class_symbol,
+      :with_status_effect,
+      fire_rate: 1,
+      magazine_size: 30,
+      status_effect_element: Element::Incendiary,
+      status_effect_damage: 10)
+
+    expect(weapon.maximum_status_effect_damage_per_magazine).to eq(70)
+  end
 end
