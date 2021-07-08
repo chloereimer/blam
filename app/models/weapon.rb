@@ -9,7 +9,9 @@ class Weapon < ApplicationRecord
   validates :name, presence: true
   validates :item_score, presence: true
   validates :level_requirement, presence: true
-  validates :rarity, presence: true, inclusion: {in: ["Common", "Uncommon", "Rare", "Epic", "Legendary"]}
+  validates :rarity,
+    presence: true,
+    inclusion: {in: ["Common", "Uncommon", "Rare", "Epic", "Legendary"]}
   validates :damage_per_projectile, presence: true
   validates :number_of_projectiles, presence: true
   validates :accuracy, presence: true
@@ -58,7 +60,7 @@ class Weapon < ApplicationRecord
   # that a magazine can apply (which we can use to calculate maximum status
   # effect damage per magazine).
   def maximum_status_effects_per_magazine
-    return 0 unless status_effect_chance > 0
+    return 0 unless can_apply_status_effect? && status_effect_chance > 0
 
     milliseconds_between_shots = 1 / fire_rate * 1000
     status_effect_duration_in_milliseconds = status_effect_element.status_effect_duration_in_seconds * 1000
@@ -91,6 +93,34 @@ class Weapon < ApplicationRecord
   end
 
   def maximum_status_effect_damage_per_magazine
+    return 0 unless can_apply_status_effect?
+
     maximum_status_effects_per_magazine * status_effect_damage
+  end
+
+  def status_effect_damage_per_second_excluding_reload_time
+    return 0 unless can_apply_status_effect?
+
+    maximum_status_effect_damage_per_magazine / seconds_to_empty_magazine
+  end
+
+  def status_effect_damage_per_second_including_reload_time
+    return 0 unless can_apply_status_effect?
+
+    maximum_status_effect_damage_per_magazine / (seconds_to_empty_magazine + reload_time)
+  end
+
+  def total_damage_per_second_including_reload_time
+    projectile_damage_per_second_including_reload_time + status_effect_damage_per_second_including_reload_time
+  end
+
+  private
+
+  def elemental_weapon?
+    element != Element::Physical
+  end
+
+  def can_apply_status_effect?
+    status_effect_element.present? && status_effect_chance.present? && status_effect_damage.present?
   end
 end

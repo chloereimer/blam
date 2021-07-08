@@ -1,0 +1,39 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>BLAM consumer</title>
+  <link rel="stylesheet" href="css/normalize.css">
+  <link rel="stylesheet" href="https://unpkg.com/purecss@2.0.6/build/pure-min.css" integrity="sha384-Uu6IeWbM+gzNVXJcM9XV3SohHtmWE+3VGi496jvgX1jyvDTXfdK+rfZc8C1Aehk5" crossorigin="anonymous">
+</head>
+
+<body>
+  <!-- Add your site or application content here -->
+  <table id="weapons" class="pure-table pure-table-horizontal">
+    <tr>
+      <th>Name</th>
+      <th>Projectile DPS</th>
+      <th>Maximum Elemental DPS</th>
+    </tr>
+  </table>
+
+  <div id="demo"></div>
+
+  <script>
+    fetch('/weapons')
+      .then(response => response.json())
+      .then((data) => {
+        data.forEach(element => {
+          weaponsTable = document.getElementById("weapons");
+
+          weaponRow = document.createElement("tr")
+
+          weaponRow.innerHTML = `<td>${element.name}</td><td>${element.projectile_damage_per_second_including_reload_time}</td><td>${element.total_damage_per_second_including_reload_time}</td>`
+          weaponsTable.append(weaponRow)
+        });
+      });
+  </script>
+</body>
+
+</html>

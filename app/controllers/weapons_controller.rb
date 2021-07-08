@@ -3,9 +3,9 @@ class WeaponsController < ApplicationController
 
   # GET /weapons
   def index
-    @weapons = Weapon.all
+    @weapons = Weapon.all.sort {|a,b| a.projectile_damage_per_second_including_reload_time <=> b.projectile_damage_per_second_including_reload_time}
 
-    render json: @weapons
+    render json: @weapons, methods: [:projectile_damage_per_second_including_reload_time, :total_damage_per_second_including_reload_time]
   end
 
   # GET /weapons/1
