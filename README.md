@@ -6,4 +6,6 @@ blam knows about things like weapon stats, weapon elements, and enemy armour typ
 
 ## building blam better
 
-in future, it would be pretty neat if blam knew about things like character abilities that impact weapon stats (e.g. reducing reload time, adding additional elemental damage), enemies with multiple armour types, and probably lots of other things. fleshing out the api endpoints and building a proper cli (or even gui!) would also make it much easier to use. also, it turns out that borderlands 2 is objectively better in every single way, so it'd be great if blam could support multiple games in the series.
+* in future, it would be pretty neat if blam knew about things like character abilities that impact weapon stats (e.g. reducing reload time, adding additional elemental damage), enemies with multiple armour types, and probably lots of other things.
+* fleshing out the api endpoints and building a proper cli (or even gui!) would make it much easier to use.
+* it turns out that borderlands 2 is objectively better in every single way, so it'd be great if blam could support multiple games in the series.
